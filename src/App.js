@@ -5,10 +5,16 @@ import Home from './Components/Home';
 import Header from './Components/Header';
 import NewBlog from './Components/NewBlog';
 import BlogPage from './Components/BlogPage';
+import React from 'react';
+
+const name = 'Madhushani';
+
+export const User = React.createContext(name);
 
 function App() {
   return (
       <Router>
+        <User.Provider value={name}> {/*methana value={''} nm delete button eka pennanne na*/}
         <Header />
         <Switch>
           <Route exact path="/">
@@ -23,15 +29,9 @@ function App() {
             <BlogPage />
           </Route>
         </Switch>
+        </User.Provider>
       </Router>
 
-
-
-    // <div>
-    //  <Header />
-     // <Home posts={posts} />
-     // {/*<NewBlog />*/}
-    // </div>
   );
 }
 

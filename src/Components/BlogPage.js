@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import useFetch from './useFetch';
+import { User } from '../App';
 
 function BlogPage() {
     const { id } = useParams();
     const history = useHistory();
+
+    const user = useContext(User);
+    const [admin, setAdmin] = useState()
+
+    useEffect(() => {
+        setAdmin(user);
+
+    }, [user]);
+    console.log(admin);
+
+
 
     const { data: post } = useFetch('https://jsonplaceholder.typicode.com/posts/' + id);  
 
@@ -27,7 +39,7 @@ function BlogPage() {
                     <div className="header-text">
                         <h1>{post.title}</h1>
                         <div className="btn-section">
-                            <button className="delete" onClick={deletePost}>Delete</button>
+                            {admin ? <button className="delete" onClick={deletePost}>Delete</button> : <></>}
                         </div>
                     </div>
                     <p>{post.userId}</p>
